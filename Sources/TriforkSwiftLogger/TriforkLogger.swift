@@ -12,11 +12,17 @@ import os.log
 public final class TriforkLogger {
     public static var defaultCategory: String = "default"
     public static var minimumLogLevel: OSLogType = .debug
+    public static var printDevelopmentInfo: Bool = false
 
     private static func log(_ message: String, at level: OSLogType, file: String, function: String, line: UInt, category: String) {
         guard minimumLogLevel >= level else { return }
-        let filePath = URL(fileURLWithPath: file)
-        os_log("%@ (%@:%d - %@) %@ ", log: OSLog.log(category: category), type: .info, level.emoji, filePath.lastPathComponent, line, function, message)
+        
+        if printDevelopmentInfo {
+            let filePath = URL(fileURLWithPath: file)
+            os_log("%@ (%@:%d - %@) %@ ", log: OSLog.log(category: category), type: .info, level.emoji, filePath.lastPathComponent, line, function, message)
+        } else {
+            os_log("%@ %@", log: OSLog.log(category: category), type: .info, level.emoji, message)
+        }
     }
 
     public static func `default`(_ message: String, category: String = defaultCategory, file: String = #file, function: String = #function, line: UInt = #line) {
