@@ -15,7 +15,8 @@ public final class TriforkLogger {
 
     private static func log(_ message: String, at level: OSLogType, file: String, function: String, line: UInt, category: String) {
         guard minimumLogLevel >= level else { return }
-        os_log("%@ (%@:%d - %@) %@ ", log: OSLog.log(category: category), type: .info, level.emoji, file, line, function, message)
+        let filePath = URL(fileURLWithPath: file)
+        os_log("%@ (%@:%d - %@) %@ ", log: OSLog.log(category: category), type: .info, level.emoji, filePath.lastPathComponent, line, function, message)
     }
 
     public static func `default`(_ message: String, category: String = defaultCategory, file: String = #file, function: String = #function, line: UInt = #line) {
