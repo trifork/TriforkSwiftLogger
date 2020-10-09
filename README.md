@@ -4,7 +4,7 @@
 
 ## Installation ⬇️
 
-Add `https://github.com/trifork/TriforkSwiftLogger.git` to your Xcode project file and start using `PrintLogger`
+Add `https://github.com/trifork/TriforkSwiftLogger.git` to your Xcode project file and start using `TriforkLogger`
 
 ---
 

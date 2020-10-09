@@ -3,9 +3,13 @@ import XCTest
 
 final class TriforkSwiftLoggerTests: XCTestCase {
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
+        TriforkLogger.minimumLogLevel = .default
+        TriforkLogger.debug("Hello!", category: "Custom cat")
+        TriforkLogger.debug("Hello!")
+        TriforkLogger.default("Hello!")
+        TriforkLogger.info("Hello!")
+        TriforkLogger.error("Hello!")
+        TriforkLogger.fault("Hello!")
     }
 
     static var allTests = [
