@@ -18,6 +18,9 @@ public struct TriforkLoggerConfig {
     /// Enables/disables emojis for log levels.
     var isEmojisEnabled: Bool
 
+    /// Suspends all actions by TriforkLogger - no logging will be performed
+    var isSuspended: Bool = false
+
     /// The default configuration for `TriforkLogger`
     /// category: `"default"`
     /// minmumLogLevel: `.default`

@@ -14,6 +14,10 @@ public final class TriforkLogger {
 
     /// MARK: - Private functions
     private static func log(_ message: String, at level: OSLogType, file: String, function: String, line: UInt, category: String) {
+        guard !config.isSuspended else {
+            return
+        }
+
         if shouldPrint(level) {
             let logMessage = constructLogMessage(message, at: level, file: file, function: function, line: line, category: category)
             os_log("%@", log: OSLog.log(category: category), type: level, logMessage)
