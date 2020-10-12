@@ -36,6 +36,10 @@ final class MultiLoggerTests: XCTestCase {
         XCTAssertTrue(singleLogger3.isFulfilled())
         XCTAssertTrue(singleLogger4.isFulfilled())
     }
+
+    static var allTests = [
+        ("testMultiLogger", testMultiLogger)
+    ]
 }
 
 class TestLogger : Logger {
@@ -48,24 +52,8 @@ class TestLogger : Logger {
     ]
 
     // MARK: - Logger
-    func `default`(_ message: String, category: String?, file: String, function: String, line: UInt) {
-        invoked[OSLogType.default.title] = true
-    }
-
-    func debug(_ message: String, category: String?, file: String, function: String, line: UInt) {
-        invoked[OSLogType.debug.title] = true
-    }
-
-    func info(_ message: String, category: String?, file: String, function: String, line: UInt) {
-        invoked[OSLogType.info.title] = true
-    }
-
-    func error(_ message: String, category: String?, file: String, function: String, line: UInt) {
-        invoked[OSLogType.error.title] = true
-    }
-
-    func fault(_ message: String, category: String?, file: String, function: String, line: UInt) {
-        invoked[OSLogType.fault.title] = true
+    func log(_ message: String, at level: OSLogType, file: String, function: String, line: UInt, category: String?) {
+        invoked[level.title] = true
     }
 
     func isFulfilled() -> Bool {
@@ -81,30 +69,11 @@ class TestAsyncLogger : TestLogger, AsyncLogger {
         self.expectation = expectation
     }
 
-    // MARK: - Logger
-    override func `default`(_ message: String, category: String?, file: String, function: String, line: UInt) {
-        sleep(1) //Sleep to prove that it is started as async
-        super.default(message, category: category, file: file, function: function, line: line)
-        fulfillExpectationIfDone()
-    }
-
-    override func debug(_ message: String, category: String?, file: String, function: String, line: UInt) {
-        super.debug(message, category: category, file: file, function: function, line: line)
-        fulfillExpectationIfDone()
-    }
-
-    override func info(_ message: String, category: String?, file: String, function: String, line: UInt) {
-        super.info(message, category: category, file: file, function: function, line: line)
-        fulfillExpectationIfDone()
-    }
-
-    override func error(_ message: String, category: String?, file: String, function: String, line: UInt) {
-        super.error(message, category: category, file: file, function: function, line: line)
-        fulfillExpectationIfDone()
-    }
-
-    override func fault(_ message: String, category: String?, file: String, function: String, line: UInt) {
-        super.fault(message, category: category, file: file, function: function, line: line)
+    override func log(_ message: String, at level: OSLogType, file: String, function: String, line: UInt, category: String?) {
+        if level == .debug {
+            sleep(1) //Sleep to prove that it is started as async
+        }
+        super.log(message, at: level, file: file, function: function, line: line, category: category)
         fulfillExpectationIfDone()
     }
 

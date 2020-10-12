@@ -24,7 +24,7 @@ public struct TriforkLoggerConfig {
     /// printDevelopmentInfo: `false`
     /// listener: `nil`
     /// isEmojisEnabled: `true`
-    static func `default`() -> TriforkLoggerConfig {
+    public static func `default`() -> TriforkLoggerConfig {
         return TriforkLoggerConfig(
             defaultCategory: "default",
             minimumLogLevel: .default,

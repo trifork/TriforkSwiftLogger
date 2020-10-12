@@ -39,12 +39,11 @@ final class TriforkSwiftLoggerTests: XCTestCase {
         let fileName = "/Users/test/ATestFile.swift"
         let functionName = "aTestFunction"
         let line: UInt = 1337
-        let category = "test-cat"
-        let log = triLogger.constructLogMessage(message, at: level, file: fileName, function: functionName, line: line, category: category)
+        let log = triLogger.constructLogMessage(message, at: level, file: fileName, function: functionName, line: line)
         XCTAssertEqual(log, "🐛 ATestFile.swift:1337 - aTestFunction | Test test")
 
         triLogger.config.isDevelopmentInfoEnabled = false
-        let log2 = triLogger.constructLogMessage(message, at: level, file: fileName, function: functionName, line: line, category: category)
+        let log2 = triLogger.constructLogMessage(message, at: level, file: fileName, function: functionName, line: line)
         XCTAssertEqual(log2, "🐛 Test test")
     }
 
@@ -53,11 +52,11 @@ final class TriforkSwiftLoggerTests: XCTestCase {
         triLogger.config.isEmojisEnabled = false
         triLogger.config.isDevelopmentInfoEnabled = false
 
-        let log = triLogger.constructLogMessage("Test test", at: .info, file: "fileName", function: "functionName", line: 1337, category: "category")
+        let log = triLogger.constructLogMessage("Test test", at: .info, file: "fileName", function: "functionName", line: 1337)
         XCTAssertEqual(log, "[INFO] Test test")
 
         triLogger.config.isEmojisEnabled = true
-        let log2 = triLogger.constructLogMessage("Test test", at: .info, file: "fileName", function: "functionName", line: 1337, category: "category")
+        let log2 = triLogger.constructLogMessage("Test test", at: .info, file: "fileName", function: "functionName", line: 1337)
         XCTAssertEqual(log2, "ℹ️ Test test")
     }
 
