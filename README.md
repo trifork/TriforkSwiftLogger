@@ -9,16 +9,24 @@ Add `https://github.com/trifork/TriforkSwiftLogger.git` to your Xcode project fi
 ## Configuration
 You can customize the default configuration for the logger by setting the `config` parameter. You can also mutate the default config by setting a single parameter on the `TriforkLoggerConfig` object.
 
-### Listener
-You can implement a `TriforkLoggerListener` and hand set it in the configuration. The listener will be invoked every time there is a relevant log messge. This can be useful for posting error log messages to the cloud.
+## MultiLogger
+You can implement multiple `Logger` classes and initialize a `MultiLogger` with multiple logger. The `MultiLogger` will invoke all loggers when logging.
+
+If you have a logger, that is doing heavy load and prefers to be invoked on background thread, you can implement `AsyncLogger` instead of the `Logger` protocol.
+
+**NOTE:** The `MultiLogger` does not have any configurations. It is up to the  `Logger` implementation to handle the behaviour of the different logging functions.
 
 ## Log
 ```
-TriforkLogger.debug("Hello!", category: "my-custom-category")
-TriforkLogger.default("Hello!")
-TriforkLogger.info("Hello!")
-TriforkLogger.error("Hello!")
-TriforkLogger.fault("Hello!")
+let logger = TriforkLogger()
+logger.debug("Hello!", category: "my-custom-category")
+logger.default("Hello!")
+logger.info("Hello!")
+logger.error("Hello!")
+logger.fault("Hello!")
+
+let multiLogger = MultiLogger(loggers: [TriforkLogger(), MyCustomLogger()])
+multiLogger.info("Hello!", category: "my-custom-category") // the info-function will be invoked for both TriforkLogger and MyCustomLogger.
 ```
 
 ---
