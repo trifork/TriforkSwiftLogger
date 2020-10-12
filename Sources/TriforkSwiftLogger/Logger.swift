@@ -1,40 +1,38 @@
-//
-//  Logger.swift
-//  Watchable
-//
-//  Created by Kim de Vos on 25/07/2019.
-//  Copyright © 2019 Trifork A/S. All rights reserved.
-//
-
 import Foundation
+import os.log
 
+/// Logger protocol
 public protocol Logger {
-    static func log(_ string: String, at level: LogLevel, file: String, function: String, line: UInt)
+    func log(_ message: String, at level: OSLogType, file: String, function: String, line: UInt, category: String?)
 }
 
+/// Loggers who implement this protocol will be started on the background queue, when invoked from the MultiLogger
+public protocol AsyncLogger : Logger {}
+
+
 extension Logger {
-
-    public static func verbose(_ string: String, file: String = #file, function: String = #function, line: UInt = #line) {
-        self.log(string, at: .verbose, file: file, function: function, line: line)
+    /// Logs a message as `default`
+    public func `default`(_ message: String, category: String? = nil, file: String = #file, function: String = #function, line: UInt = #line) {
+        log(message, at: .default, file: file, function: function, line: line, category: category)
     }
 
-    public static func debug(_ string: String, file: String = #file, function: String = #function, line: UInt = #line) {
-        self.log(string, at: .debug, file: file, function: function, line: line)
+    /// Logs a message as `debug`
+    public func debug(_ message: String, category: String? = nil, file: String = #file, function: String = #function, line: UInt = #line) {
+        log(message, at: .debug, file: file, function: function, line: line, category: category)
     }
 
-    public static func info(_ string: String, file: String = #file, function: String = #function, line: UInt = #line) {
-        self.log(string, at: .info, file: file, function: function, line: line)
+    /// Logs a message as `info`
+    public func info(_ message: String, category: String? = nil, file: String = #file, function: String = #function, line: UInt = #line) {
+        log(message, at: .info, file: file, function: function, line: line, category: category)
     }
 
-    public static func warning(_ string: String, file: String = #file, function: String = #function, line: UInt = #line) {
-        self.log(string, at: .warning, file: file, function: function, line: line)
+    /// Logs a message as `error`
+    public func error(_ message: String, category: String? = nil, file: String = #file, function: String = #function, line: UInt = #line) {
+        log(message, at: .error, file: file, function: function, line: line, category: category)
     }
 
-    public static func error(_ string: String, file: String = #file, function: String = #function, line: UInt = #line) {
-        self.log(string, at: .error, file: file, function: function, line: line)
-    }
-
-    public static func fatal(_ string: String, file: String = #file, function: String = #function, line: UInt = #line) {
-        self.log(string, at: .fatal, file: file, function: function, line: line)
+    /// Logs a message as `fault`
+    public func fault(_ message: String, category: String? = nil, file: String = #file, function: String = #function, line: UInt = #line) {
+        log(message, at: .fault, file: file, function: function, line: line, category: category)
     }
 }
