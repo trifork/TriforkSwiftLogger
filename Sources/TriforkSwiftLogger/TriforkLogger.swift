@@ -2,7 +2,7 @@ import Foundation
 import os.log
 
 /// Default `os_log` wrapper
-public final class TriforkLogger : Logger {
+public final class TriforkLogger : LoggerProtocol {
 
     /// Sets a custom configuration of TriforkLogger
     public var config = TriforkLoggerConfig.default() {

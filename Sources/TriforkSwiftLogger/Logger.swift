@@ -2,15 +2,15 @@ import Foundation
 import os.log
 
 /// Logger protocol
-public protocol Logger {
+public protocol LoggerProtocol {
     func log(_ message: String, at level: OSLogType, file: String, function: String, line: UInt, category: String?)
 }
 
 /// Loggers who implement this protocol will be started on the background queue, when invoked from the MultiLogger
-public protocol AsyncLogger : Logger {}
+public protocol AsyncLoggerProtocol : LoggerProtocol {}
 
 
-extension Logger {
+extension LoggerProtocol {
     /// Logs a message as `default`
     public func `default`(_ message: String, category: String? = nil, file: String = #file, function: String = #function, line: UInt = #line) {
         log(message, at: .default, file: file, function: function, line: line, category: category)

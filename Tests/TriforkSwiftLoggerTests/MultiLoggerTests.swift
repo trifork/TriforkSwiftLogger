@@ -42,7 +42,7 @@ final class MultiLoggerTests: XCTestCase {
     ]
 }
 
-class TestLogger : Logger {
+class TestLogger : LoggerProtocol {
     var invoked: [String: Bool] = [
         OSLogType.default.title: false,
         OSLogType.debug.title: false,
@@ -61,7 +61,7 @@ class TestLogger : Logger {
     }
 }
 
-class TestAsyncLogger : TestLogger, AsyncLogger {
+class TestAsyncLogger : TestLogger, AsyncLoggerProtocol {
 
     let expectation: XCTestExpectation
 

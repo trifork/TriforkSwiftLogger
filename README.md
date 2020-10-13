@@ -10,11 +10,11 @@ Add `https://github.com/trifork/TriforkSwiftLogger.git` to your Xcode project fi
 You can customize the default configuration for the logger by setting the `config` parameter. You can also mutate the default config by setting a single parameter on the `TriforkLoggerConfig` object.
 
 ## MultiLogger
-You can implement multiple `Logger` classes and initialize a `MultiLogger` with multiple logger. The `MultiLogger` will invoke all loggers when logging.
+You can implement multiple `LoggerProtocol` classes and initialize a `MultiLogger` with multiple logger. The `MultiLogger` will invoke all loggers when logging.
 
-If you have a logger, that is doing heavy load and prefers to be invoked on background thread, you can implement `AsyncLogger` instead of the `Logger` protocol.
+If you have a logger, that is doing heavy load and prefers to be invoked on background thread, you can implement `AsyncLoggerProtocol` instead of the `Logger` protocol.
 
-**NOTE:** The `MultiLogger` does not have any configurations. It is up to the  `Logger` implementation to handle the behaviour of the different logging functions.
+**NOTE:** The `MultiLogger` does not have any configurations. It is up to the  `LoggerProtocol` implementation to handle the behaviour of the different logging functions.
 
 ## Log
 ```
