@@ -3,20 +3,30 @@ import os.log
 
 /// Configuration model for `TriforkLogger`
 public struct TriforkLoggerConfig {
+
+    /// Public initializer
+    public init(defaultCategory: String, minimumLogLevel: OSLogType, isDevelopmentInfoEnabled: Bool, isEmojisEnabled: Bool, isSuspended: Bool = false) {
+        self.defaultCategory = defaultCategory
+        self.minimumLogLevel = minimumLogLevel
+        self.isDevelopmentInfoEnabled = isDevelopmentInfoEnabled
+        self.isEmojisEnabled = isEmojisEnabled
+        self.isSuspended = isSuspended
+    }
+
     /// Sets the default category, that is used for `os_log` if none is specified for a log message
-    var defaultCategory: String
+    public var defaultCategory: String
 
     /// Sets the minimum logLevel that you wish to see printed.
-    var minimumLogLevel: OSLogType
+    public var minimumLogLevel: OSLogType
 
     /// Enables/disables development information in log messages, such as file name, line number and function name.
-    var isDevelopmentInfoEnabled: Bool
+    public var isDevelopmentInfoEnabled: Bool
 
     /// Enables/disables emojis for log levels.
-    var isEmojisEnabled: Bool
+    public var isEmojisEnabled: Bool
 
     /// Suspends all actions by TriforkLogger - no logging will be performed
-    var isSuspended: Bool = false
+    public var isSuspended: Bool = false
 
     /// The default configuration for `TriforkLogger`
     /// category: `"default"`
