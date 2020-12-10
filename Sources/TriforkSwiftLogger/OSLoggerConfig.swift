@@ -2,10 +2,10 @@ import Foundation
 import os.log
 
 /// Configuration model for `TriforkLogger`
-public struct TriforkLoggerConfig {
+public struct OSLoggerConfig {
 
     /// Public initializer
-    public init(defaultCategory: String, minimumLogLevel: OSLogType, isDevelopmentInfoEnabled: Bool, isEmojisEnabled: Bool, isSuspended: Bool = false) {
+    public init(defaultCategory: String, minimumLogLevel: LogLevel, isDevelopmentInfoEnabled: Bool, isEmojisEnabled: Bool, isSuspended: Bool = false) {
         self.defaultCategory = defaultCategory
         self.minimumLogLevel = minimumLogLevel
         self.isDevelopmentInfoEnabled = isDevelopmentInfoEnabled
@@ -17,7 +17,7 @@ public struct TriforkLoggerConfig {
     public var defaultCategory: String
 
     /// Sets the minimum logLevel that you wish to see printed.
-    public var minimumLogLevel: OSLogType
+    public var minimumLogLevel: LogLevel
 
     /// Enables/disables development information in log messages, such as file name, line number and function name.
     public var isDevelopmentInfoEnabled: Bool
@@ -34,10 +34,10 @@ public struct TriforkLoggerConfig {
     /// printDevelopmentInfo: `false`
     /// listener: `nil`
     /// isEmojisEnabled: `true`
-    public static func `default`() -> TriforkLoggerConfig {
-        return TriforkLoggerConfig(
+    public static func `default`() -> OSLoggerConfig {
+        return OSLoggerConfig(
             defaultCategory: "default",
-            minimumLogLevel: .default,
+            minimumLogLevel: .debug,
             isDevelopmentInfoEnabled: false,
             isEmojisEnabled: true
         )
