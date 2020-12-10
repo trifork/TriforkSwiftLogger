@@ -61,20 +61,20 @@ final class OSLoggerTests: XCTestCase {
     }
 
     func testLogLevelData() {
-        XCTAssertEqual(OSLogType.default.emoji, "📢")
-        XCTAssertEqual(OSLogType.default.title, "DEFAULT")
+        XCTAssertEqual(LogLevel.debug.emoji, "🐛")
+        XCTAssertEqual(LogLevel.debug.title, "DEBUG")
 
-        XCTAssertEqual(OSLogType.debug.emoji, "🐛")
-        XCTAssertEqual(OSLogType.debug.title, "DEBUG")
+        XCTAssertEqual(LogLevel.info.emoji, "ℹ️")
+        XCTAssertEqual(LogLevel.info.title, "INFO")
 
-        XCTAssertEqual(OSLogType.info.emoji, "ℹ️")
-        XCTAssertEqual(OSLogType.info.title, "INFO")
+        XCTAssertEqual(LogLevel.warning.emoji, "⚠️")
+        XCTAssertEqual(LogLevel.warning.title, "WARNING")
 
-        XCTAssertEqual(OSLogType.error.emoji, "🔥")
-        XCTAssertEqual(OSLogType.error.title, "ERROR")
+        XCTAssertEqual(LogLevel.error.emoji, "🔴")
+        XCTAssertEqual(LogLevel.error.title, "ERROR")
 
-        XCTAssertEqual(OSLogType.fault.emoji, "💥")
-        XCTAssertEqual(OSLogType.fault.title, "FAULT")
+        XCTAssertEqual(LogLevel.critical.emoji, "🔥")
+        XCTAssertEqual(LogLevel.critical.title, "CRITICAL")
     }
 
     static var allTests = [
