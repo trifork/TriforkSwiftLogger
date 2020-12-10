@@ -1,5 +1,4 @@
 import Foundation
-import os.log
 
 /// Configuration model for `TriforkLogger`
 public struct OSLoggerConfig {

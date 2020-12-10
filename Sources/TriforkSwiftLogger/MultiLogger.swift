@@ -1,5 +1,4 @@
 import Foundation
-import os.log
 
 /// Multi logger class to log for multiple loggers at once
 public final class MultiLogger : LoggerProtocol {

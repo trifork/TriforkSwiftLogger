@@ -1,5 +1,4 @@
 import XCTest
-import os.log
 @testable import TriforkSwiftLogger
 
 final class MultiLoggerTests: XCTestCase {
