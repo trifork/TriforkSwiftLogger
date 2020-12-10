@@ -60,29 +60,11 @@ final class OSLoggerTests: XCTestCase {
         XCTAssertEqual(log2, "ℹ️ Test test")
     }
 
-    func testLogLevelData() {
-        XCTAssertEqual(LogLevel.debug.emoji, "🐛")
-        XCTAssertEqual(LogLevel.debug.title, "DEBUG")
-
-        XCTAssertEqual(LogLevel.info.emoji, "ℹ️")
-        XCTAssertEqual(LogLevel.info.title, "INFO")
-
-        XCTAssertEqual(LogLevel.warning.emoji, "⚠️")
-        XCTAssertEqual(LogLevel.warning.title, "WARNING")
-
-        XCTAssertEqual(LogLevel.error.emoji, "🔴")
-        XCTAssertEqual(LogLevel.error.title, "ERROR")
-
-        XCTAssertEqual(LogLevel.critical.emoji, "🔥")
-        XCTAssertEqual(LogLevel.critical.title, "CRITICAL")
-    }
-
     static var allTests = [
         ("testThatAllFunctionsCanBeCalled", testThatAllFunctionsCanBeCalled),
         ("testMinimumLogLevels", testMinimumLogLevels),
         ("testLogMessage", testLogMessage),
-        ("testEmojis", testEmojis),
-        ("testLogLevelData", testLogLevelData),
+        ("testEmojis", testEmojis)
     ]
 }
 
@@ -92,6 +74,7 @@ private extension OSLogger {
         for trueType in trueLevels {
             XCTAssertTrue(shouldPrint(trueType), "True type (\(trueType.title)) failed for \(config.minimumLogLevel.title)")
         }
+
         for falseType in falseLevels {
             XCTAssertFalse(shouldPrint(falseType), "False type (\(falseType.title)) failed for \(config.minimumLogLevel.title)")
         }
