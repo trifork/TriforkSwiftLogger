@@ -11,7 +11,7 @@ public final class MultiLogger : LoggerProtocol {
         self.loggers = loggers
     }
 
-    public func log(_ message: String, at level: OSLogType, file: String, function: String, line: UInt, category: String?) {
+    public func log(_ message: String, at level: LogLevel, file: String, function: String, line: UInt, category: String?) {
         invokeLoggers { (logger: LoggerProtocol) in
             logger.log(message, at: level, file: file, function: function, line: line, category: category)
         }
@@ -19,13 +19,7 @@ public final class MultiLogger : LoggerProtocol {
 
     private func invokeLoggers(function: @escaping (LoggerProtocol) -> Void) {
         for logger: LoggerProtocol in loggers {
-            if logger is AsyncLoggerProtocol {
-                DispatchQueue.global(qos: .background).async {
-                    function(logger)
-                }
-            } else {
-                function(logger)
-            }
+            function(logger)
         }
     }
 }
